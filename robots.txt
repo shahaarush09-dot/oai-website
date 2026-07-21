@@ -1,0 +1,21 @@
+# Orphan Access Initiative — robots.txt
+# Tells search engines how to crawl this site.
+
+User-agent: *
+Allow: /
+Disallow: /private/
+Disallow: /admin/
+Disallow: /cgi-bin/
+
+# Point crawlers to the sitemap for discovery.
+Sitemap: https://orphanaccessinitiative.org/sitemap.xml
+
+# Block aggressive third-party SEO crawlers (optional).
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
