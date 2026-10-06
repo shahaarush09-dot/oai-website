@@ -526,6 +526,108 @@ footer{background:var(--graphite);color:var(--on-dark-2);padding:80px 0 40px;pos
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
 @media(max-width:680px){.grain{display:none}}
 @media(prefers-reduced-motion:reduce){.grain{display:none}}
+
+/* ================= PRESS SLIVER ================= */
+.press{position:absolute;left:0;right:0;bottom:0;z-index:4;
+  border-top:1px solid var(--on-dark-line);background:rgba(8,13,22,.5);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  opacity:0;animation:pressIn .9s ease 1s forwards}
+@keyframes pressIn{from{opacity:0}to{opacity:1}}
+.press-in{position:relative;max-width:1220px;margin:0 auto;padding:0 40px;height:48px;display:flex;align-items:center;gap:18px}
+.press-label{flex:none;display:inline-flex;align-items:center;gap:7px;
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-3)}
+.press-label b{font-weight:500;color:var(--on-dark-2)}
+.press-sep{flex:none;width:1px;height:16px;background:var(--on-dark-line-2)}
+.press-link{flex:1;min-width:0;display:flex;align-items:center;gap:18px;text-decoration:none;color:var(--on-dark-1)}
+.press-link::after{content:'';position:absolute;inset:0}
+.press-h{flex:1;min-width:0;font-size:14px;font-weight:450;letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .2s}
+.press-cue{flex:none;display:inline-flex;align-items:center;gap:8px;
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--clinical-2)}
+.press-cue .arr{display:inline-block;transition:transform .25s var(--ease)}
+.press-link:hover .press-h{color:#fff}
+.press-link:hover .arr{transform:translateX(3px)}
+.press-link:focus{outline:none}
+.press-link:focus-visible::after{outline:1px solid var(--clinical-2);outline-offset:-4px}
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media(min-width:641px){
+  .hero{padding-top:64px;padding-bottom:48px}
+  .hero-scrollcue{bottom:66px}
+}
+@media(max-width:900px){.press-cue .tx{display:none}}
+@media(max-width:640px){
+  .press{position:relative;left:auto;right:auto;bottom:auto;margin-top:32px;background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:1px solid var(--on-dark-line)}
+  .press-in{height:auto;padding:12px 20px 13px;flex-direction:column;align-items:stretch;gap:6px}
+  .press-sep{display:none}
+  .press-link{gap:12px}
+  .press-h{font-size:13.5px}
+}
+
+/* ================= PEARCE TAB ================= */
+.pt-tab{position:fixed;right:0;bottom:28px;z-index:580;
+  display:flex;align-items:center;gap:10px;padding:7px 15px 7px 7px;
+  font-family:'Archivo',sans-serif;text-align:left;color:var(--on-dark-1);cursor:pointer;
+  background:rgba(14,22,38,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border:1px solid var(--on-dark-line-2);border-right:none;border-radius:2px 0 0 2px;
+  transform:translateX(calc(100% + 2px));opacity:0;visibility:hidden;
+  transition:transform .45s var(--ease),opacity .3s ease,visibility 0s linear .45s,background .2s}
+.pt-tab.show{transform:none;opacity:1;visibility:visible;transition:transform .45s var(--ease),opacity .3s ease,visibility 0s,background .2s}
+.pt-tab:hover{background:rgba(22,33,54,.97)}
+.pt-tab.show.is-open{transform:translateX(calc(100% + 2px));opacity:0}
+.pt-tab:focus{outline:none}
+.pt-tab:focus-visible{outline:2px solid var(--clinical-2);outline-offset:2px}
+.pt-tab img{flex:none;width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,.16)}
+.pt-tab-tx{display:flex;flex-direction:column;gap:4px;line-height:1.1}
+.pt-tab-n{font-size:12.5px;font-weight:600;letter-spacing:-.005em;white-space:nowrap}
+.pt-tab-n .sm{display:none}
+.pt-tab-n .arr{display:inline-block;margin-left:2px;color:var(--clinical-2);transition:transform .25s var(--ease)}
+.pt-tab:hover .pt-tab-n .arr{transform:translateX(3px)}
+.pt-tab-c{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark-3);white-space:nowrap}
+
+.pt-scrim{position:fixed;inset:0;z-index:670;background:rgba(11,18,32,.18);
+  opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s}
+.pt-scrim.on{opacity:1;visibility:visible;transition:opacity .3s ease,visibility 0s}
+
+.pt-panel{position:fixed;right:28px;bottom:28px;z-index:680;
+  width:392px;max-width:calc(100vw - 40px);max-height:calc(100vh - 112px);overflow-y:auto;overscroll-behavior:contain;
+  background:var(--paper);color:var(--ink);border:1px solid var(--line-2);border-top:2px solid var(--clinical);border-radius:2px;
+  box-shadow:0 28px 64px -28px rgba(11,18,32,.5);padding:24px 26px 22px;
+  transform:translateX(calc(100% + 40px));visibility:hidden;
+  transition:transform .38s var(--ease),visibility 0s linear .38s}
+.pt-panel.open{transform:none;visibility:visible;transition:transform .38s var(--ease),visibility 0s}
+.pt-x{position:absolute;top:12px;right:12px;width:34px;height:34px;display:grid;place-items:center;
+  background:none;border:1px solid transparent;border-radius:2px;color:var(--ink-3);cursor:pointer;transition:color .2s,border-color .2s}
+.pt-x:hover{color:var(--ink);border-color:var(--line-2)}
+.pt-x:focus{outline:none}
+.pt-x:focus-visible{outline:2px solid var(--clinical);outline-offset:1px}
+.pt-head{display:flex;align-items:center;gap:16px;margin:16px 0 18px}
+.pt-head img{flex:none;width:64px;height:64px;border-radius:50%;object-fit:cover;border:1px solid var(--line-2)}
+.pt-name{font-size:24px;font-weight:500;color:var(--ink);line-height:1.1}
+.pt-creds{list-style:none;border-top:1px solid var(--line);margin-bottom:20px}
+.pt-creds li{font-size:13.5px;line-height:1.45;color:var(--ink-2);padding:10px 0;border-bottom:1px solid var(--line)}
+.pt-q{margin:0 0 18px;padding-left:16px;border-left:2px solid var(--clinical)}
+.pt-q p{font-family:'Fraunces',serif;font-variation-settings:'SOFT' 0,'WONK' 0,'opsz' 24;font-size:16px;line-height:1.55;color:var(--ink);letter-spacing:-.005em}
+.pt-q .said{font-family:'Archivo',sans-serif;font-size:13.5px;color:var(--ink-3)}
+.pt-src{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.pt-src a{color:var(--clinical);text-decoration:none;border-bottom:1px solid rgba(29,111,224,.3);transition:border-color .2s}
+.pt-src a:hover{border-color:var(--clinical)}
+.pt-src a:focus-visible{outline:2px solid var(--clinical);outline-offset:2px}
+html.pt-lock,html.pt-lock body{overflow:hidden}
+
+@media(max-width:640px){
+  .pt-tab{bottom:16px;gap:8px;padding:5px 12px 5px 5px}
+  .pt-tab img{width:30px;height:30px}
+  .pt-tab-c{display:none}
+  .pt-tab-n .lg{display:none}
+  .pt-tab-n .sm{display:inline}
+  .pt-scrim{background:rgba(11,18,32,.5)}
+  .pt-panel{left:0;right:0;bottom:0;width:100%;max-width:none;max-height:86vh;
+    border-left:none;border-right:none;border-bottom:none;border-radius:2px 2px 0 0;
+    padding:26px 20px calc(22px + env(safe-area-inset-bottom));transform:translateY(100%)}
+  .pt-panel::before{content:'';position:absolute;top:9px;left:50%;width:36px;height:3px;margin-left:-18px;border-radius:2px;background:var(--line-2)}
+}
+@media(prefers-reduced-motion:reduce){
+  .press,.hero-badge,.hero-h1,.hero-sub,.hero-cta-row,.hero-metrics,.hero-scrollcue{opacity:1}
+}
 </style>
 </head>
 <body>
@@ -577,6 +679,17 @@ footer{background:var(--graphite);color:var(--on-dark-2);padding:80px 0 40px;pos
       <a href="#mission" class="btn-line">Our Mission</a>
     </div>
   </div>
+  <aside class="press" id="press" aria-label="Press">
+    <div class="press-in">
+      <span class="press-label">Featured in <b>Rare Disease Advisor</b></span>
+      <span class="press-sep" aria-hidden="true"></span>
+      <a class="press-link" href="https://www.rarediseaseadvisor.com/features/new-jersey-teens-launch-oai-nexus-public-ai-rare-disease-platform/" target="_blank" rel="noopener noreferrer">
+        <span class="press-h">Two New Jersey Teens Launch OAI Nexus, a Public AI Platform for Rare Diseases</span>
+        <span class="press-cue"><span class="tx">Read the feature</span><span class="arr" aria-hidden="true">→</span></span>
+        <span class="vh"> (opens in a new tab)</span>
+      </a>
+    </div>
+  </aside>
   <div class="hero-metrics">
     <div class="hmetric"><div class="hmetric-n">10,000<span style="font-size:20px">+</span></div><div class="hmetric-l">Rare diseases identified globally</div></div>
     <div class="hmetric"><div class="hmetric-n">95<span style="font-size:20px">%</span></div><div class="hmetric-l">Lack an FDA-approved treatment</div></div>
@@ -933,6 +1046,32 @@ footer{background:var(--graphite);color:var(--on-dark-2);padding:80px 0 40px;pos
     </div>
   </div>
 </footer>
+
+
+<!-- ===================== PEARCE SIDE TAB ===================== -->
+<button class="pt-tab" id="pt-tab" type="button" aria-expanded="false" aria-controls="pt-panel" aria-haspopup="dialog">
+  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wgARCACQAJADASIAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAAAgMBBAUGAAf/xAAYAQEAAwEAAAAAAAAAAAAAAAAAAQIDBP/aAAwDAQACEAMQAAAB+a+mSC8REyRBS6CZbIqXBIJOQIZ4XDBKczJ6ZIizNutk0Lo0vROWCLRST4W6ZB4/SWLYM8vEeKSLxN289ORLp9nPfiX9ylPNUeooHLtW7XmDxxegiQlIvESXiNbSxt3PW9oZGjl02BpklGXpUJrzjk6mnPThkaZKFomcYsPH4yzpZHR56oZo1c+ixnbkRepX2sRGbpnXvnkCwduRYsEzWCYRiYezj36abdOlVz6OjhYxOjmshJZohpzrg40xULgMkxMJoMDYBRO9Sz9TLp1xCzF0ULWWqgn5G/Lfg4QuDEx2AYbVyOZkVToCXWrfovYunTU9PWv3p8941q749BqcRdiepGncMSa1WYuUQAm5TKHWdjyGxcPacD9JibfyDv8A4sgIkYLmPQl9fyf/xAApEAACAgECBQMEAwAAAAAAAAABAgADBBESBRATITAgIjEGFDIzI0BC/9oACAEBAAEFAv7OzQbTApmw+Va4TsGjGfDe2BHizTxUIXs3CWd41hgc7mi6gayv48NAPSal1VgZ0m2/bPrXguYcLQXY+kX58OD+d/668YGV0qJ0xHWPMn9a/PhwOx+ZTy1jx5kn2t2Kfj4MaKyhEsUTf36gUCyx4++XLuqILs1HSTwUfNqut/TsYYeottE6KWSukJL17Y1QQ5KKB4F7Gk74UGlPfIm0RhtW8zG7zMPb0CD0Y7S23auAymG1NTrXC+5W+cU6WXndb4cYE25RKSpK2NOii1nWysaD/PUIPgHJTta470xWah+ta6J+TLMhtF02p6hBBz6hSKoiLOygt7SdTxBejwPDyOqPSOQ5CNtauq4rEyRo1vUjEvMPEN7fU2RvyBKcxGXmOZIUPlaTdZceHoLIysj1akohMxeGzPvTDxbXa2yayjJeqVZVdnITcBGtjPqYvtHAe91mEuQiYV634WIuOJ9QZv3OT6arXqhaM8J566n6fH8ufxOytsXiWQlmNfVk08bzPtME+v8A/8QAHxEAAgICAgMBAAAAAAAAAAAAAAECESAhAxIQMDFB/9oACAEDAQE/AcKzSK8NDxidBQJRJ48fj4PZKN48asUaHGxqkS1HHiexy2dizkl+YrQtiSRJj+5QdHZslOvR3vH/xAAdEQADAAMAAwEAAAAAAAAAAAAAARECECASITEw/9oACAECAQE/Ad0vbZdJ9NFKUx5y1BGL5yLS6X3nMhCGC5Z8G6Lto9GOH4eMLx//xAAyEAABAwEFBgQEBwAAAAAAAAABAAIRIQMSMDFBEBMgIlFhBDJxsSNSYnIzQEKBkaHB/9oACAEBAAY/AvzMuCjXHrl2VKKgLlVq1laqDnhw1cooFouVG9mhX+lmq4b7uavERKrCELJVoq1V7DtPsKA2Cg4TOE/vAPHHVeiGC/0TWzXVeYILuuVtOqrVeihtSqvaXdBg3aQUd3ArmQjvLaRoICuuKJQvl3rKIZN3uU4ZJxeY0onkRG7GDKE6jZOym0t1TGDQVwo6IpyLRVBwMjUIGZ2O+1OOmFAzXMpDs+ihgn0CDDZvk6Qvp76Iko3dc8Nrhomu6qbB9z6YkK661p2EI1JnU6oqAr5yvBmIB+lTtqi8/shPmtbS8rj/AMT3w3VyhXXLML6V2UupZDMplg2gYJI6KmaG9N13HzGFyj+VzuMLxLNLg90WvFVQKqDreg+VOtCAGs8repTnvMucZJ2xmzoVndPR3BTg8ROrR7qDQ6Hot0LM3uuinzWnzbN2w/BsqDudTxchjtxvPWiFn4ZpA1tTr6IOcb7MjZreWLpb7dk66fi2nIz/AE4H/8QAJhABAAICAgICAgIDAQAAAAAAAQARITFBURBhcYGRsSDwocHR8f/aAAgBAQABPyGV5qECB4rzUqVKleCEqVAlQNe5exBrqDOn2inj3mPRiVK8V4qVAh4qVGbs/mhYL0WrhaaIu93HkLwymDfr4iW1N5mdUHW/CpUqVKhAlSoAIXbeg7hY13TCtADjmGato16IlKW5Ze0DWyNyo1/35IrQt15qVKhDwSz17YdQXQcmUvZDCG3UKw2ati9kUt7CrZGRhThhpa1XivLAhAgS+DRZNjXRiUuCM7EWdEouo6qZO56QdQOtSokSVCECBG0grIdRb2mm5xxDZXUL+ppqZkNKGDUrXSf4UqVEiQhCEtYNUX8xOgJf3iRVnUBuMk3DftBEpptKLGfAlh9oRFVjh2bglRIxIQhCJX9z6nAMGRRUtHwZEBLhX4mPkOpVvkVUhYQmzhGLVSx1EiZZHP1C3FAeVWJGMYECBAi1NQTTdG4TAmq1VQC1alrh+J0Ny1rqEwL4fiELXWRUqJE8gQhMp0VBEUtZj+VZzLk34OYxR5bj4mqBIVfqXNaNvzKe5URIkSJCEIQljcj6mddd3CdX2bjtH5LBRMx0x2eZrZTXISncVQ+WJCEPAiKKVCVbMGaprmlfdMuqdXsX8cwWolZ3KBaXmV254h2Dc6UUj/Bh5BCVe9QOt5a6mOeSa7Y2X1AoqZL9TWMQ/Q1+mUCYGHr/AN8JKiQ8DwJ8MTQSrI4uUuUJ+ipeps2iNVRlAH/ynzA0khpJg+j9xIikGknTQrVj79TDWRvk8PgQlooQuW9wfUCYiOsfTFUA/hO4IWgNlqgyzDd3V2/PUDyVDyaP7xLDydhh4A0r+1TMEr4z/MfB2GL6RuRufMZl2+PIKxmv+sS9AMqxXu4FtdumviPqWl5FP7nUZz4uXFrUfYZ3SzWvDzLzbB5NSjh0f7nFWY/Dqe5Tdsjr53fu4Y40jt9juXQBvg/4E1o8L/Cp/9oADAMBAAIAAwAAABBShhffXBhRRi7LjI8BjzAkZ0wzQzBS7uih2jQjC9MRXgRQDT87OICyTCQZ7B/ECySTouuImYhmNuR8dMM7/8QAHBEAAwADAQEBAAAAAAAAAAAAAAERICExEFFB/9oACAEDAQE/EPUqV8J9yvt+IJYkx3UFXRFEITeRbKhqGJUsbhL9EhGgh7xgIBHZQW1OL1R1+TcQrwes8mhpCEi7hfW5sb6LH//EAB0RAAMAAwEAAwAAAAAAAAAAAAABERAgITFBUWH/2gAIAQIBAT8QzBH2W+bS4j9DY1CdV16NnHhQg+yFM4YhPuvIwteCr6dItUqFxjwdK9UqHQwIJRLWYp8BnrH15g8JVQS9D0f/xAAmEAEAAgIBBAMAAgMBAAAAAAABABEhMUEQUWFxgZGhsdEgweHw/9oACAEBAAE/ECGErECGUB0FxhzqBCAxAhB03pJBB0HQHOZT30QAR0A8nUrIYoqupWQVJoKgchw3ZCtWbh4QOhI4RfQECEH9IqwDCizjgjUpSh7f49wFqJrAat5u3iAZrdin5xDF8bo3TemAMy7NfZLHBO11O539TZs4uHSYegOgQQEkljwsq+JuQW3Nd8aZcfNTld4c3Aw6drQFHyqr4jolbSt9ZxLLUcAHwxB0nAbB8cSs3G7LfZ7jlCeO7cTxKjDhHpCBBFUjEt7IJqDDzrLXH7DWzAyQdkXh+HicpDksuKFxu9/MS5zAMnuCcAIJiUcrgE2hKs6GMXQHUK1pdB8oEYtI5rJjMCa9F054mpIYxiXn8IBoTholFdsZgMRSpT3rDCKXopMnmoKXkv8ACjAg6lbxunCz+R3IiUOLZVMP3AFrEIhbBwRNqR75hyOKl1pYHjUXKhgadwDW3yjLI9AQZgIYioDylYP+4QI6P0YbchbD+ysWGGpdhheNiuIGJLW1XgJzLNUfsYaZVfFYhujiGbziVni190vh5qMUQdAZhghmBYbUaQpn3EgOg0713Ypgg0klNXR39PmCysOFD0v5lwwE4W41EtmYDOsOiHyZUjfctxANjA90BJu605eHPxMH8bMJLdrhmR7QXBPSXTF1pKIarSXeGKZ2Ais1uZXJzTDVRW6s6VmTEbu44MLfSHXQXciNmiKgTm5TXdc8ZIT1MQwoqU81cclbuPUAag6RhrUo7QHgmRgaVxXEey3UOaSJpI0OV9agfoDmvl6dpXAtBJjTuzBE66nNYlv3LF3alVYP93/iCGHp3jo+YAFpjtXeLNSYSqC8o2x9jctN+L594m8aZ28lvR7hq5S1dieJwoMPUDYgbGwWw/LZZ38xLiYg6w56QQkWHeCdu0EYGgye4RDcVWfQfXMUfUGtbHQ9G6IFuUbbObdfFRDpGyjtlaMuIC4R69WqfNJ9QI07lOYxOgThBfQ2lRQyKYyqQy/R4Y1WASLxBpEC/Ub9KLXCVcq7gWwGCuYLaji+4I+E9THN6xf6fso4R9dBw6Jg6dJvApejbwQLlMVvMl/YEqS2CzR2gO27ssWuE2NL4IYFEjW8cQXnKOg4Hd9u2WVqDcGD40+0TMtqyPiAFSgmvWmksKAFiWJ3IncqadG/TXp9j9QFC7jj2BCJQ+M/BKqAMTstfvMZM0deEGYDGcMfSoBeR4rljLAtr4mY9csuJwGtbvttK+VzjA817an3RBnEKKAVegxBh3rcAfwfxExDO0fWj+QNDxw3/uKZEVO0IJXzq2LLU2V3KpK3bqClYMwVdkH0gScJWrsnK7fUTjEXQ4949Z4jAqM9PQ8e9wGCgrVMN3CTks8gZHyzJLhge4NLD8RsU67QSkOV+Jjhw9RFWqJVGnMOSZhSrafsDr9OxLlNAviv4Ra+zT/+ic11UV0EBq74b3QXSXqWflpKLvhD6dlkszcPNz+k8pKIso1cfEAu2sS+h0f/2Q==" width="34" height="34" alt="">
+  <span class="pt-tab-tx"><span class="pt-tab-c">Chair, IRDiRC</span><span class="pt-tab-n"><span class="lg">See what David Pearce said about OAI Nexus</span><span class="sm">What Dr. Pearce said</span> <span class="arr" aria-hidden="true">&rarr;</span></span></span>
+</button>
+<div class="pt-scrim" id="pt-scrim"></div>
+<div class="pt-panel" id="pt-panel" role="dialog" aria-modal="true" aria-labelledby="pt-name">
+  <button class="pt-x" id="pt-x" type="button" aria-label="Close">
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+  </button>
+  <span class="eyebrow">Mentor to OAI&rsquo;s co-founders</span>
+  <div class="pt-head">
+    <img src="data:image/jpeg;base64,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" width="64" height="64" alt="Portrait of Dr. David Pearce" loading="lazy" decoding="async">
+    <h2 class="pt-name" id="pt-name">David Pearce, PhD</h2>
+  </div>
+  <ul class="pt-creds">
+    <li>Professor of Pediatrics, University of South Dakota, Sioux Falls</li>
+    <li>Chairman, International Rare Diseases Research Consortium (IRDiRC)</li>
+  </ul>
+  <blockquote class="pt-q">
+    <p>&ldquo;What these young men have done is very meaningful,&rdquo; <span class="said">Dr. Pearce said in an interview.</span> &ldquo;They have recognized all the different stakeholders in the rare disease community&mdash;patients, physicians, advocates, and many others&mdash;and built a portal that reports out the information each stakeholder needs to know and leverage for any individual rare disease.&rdquo;</p>
+  </blockquote>
+  <p class="pt-src">Quoted in <a href="https://www.rarediseaseadvisor.com/features/new-jersey-teens-launch-oai-nexus-public-ai-rare-disease-platform/" target="_blank" rel="noopener noreferrer">Rare Disease Advisor <span aria-hidden="true">&#8599;</span><span class="vh"> (opens in a new tab)</span></a></p>
+</div>
 
 <script>
 /* ---------- NAV: scroll state + context colour ---------- */
@@ -1379,6 +1518,55 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
       } else run=false;
     },{rootMargin:'80px'}).observe(sec);
   } else { run=true; requestAnimationFrame(frame); runCounts(); }
+})();
+
+/* ---------- Pearce side tab ---------- */
+(function(){
+  var tab=document.getElementById('pt-tab'),panel=document.getElementById('pt-panel'),
+      scrim=document.getElementById('pt-scrim'),x=document.getElementById('pt-x');
+  if(!tab||!panel)return;
+  var press=document.getElementById('press'),gate=document.getElementById('nexus');
+  var mobile=matchMedia('(max-width:640px)');
+  var shown=false,open=false,ticking=false;
+  function check(){
+    ticking=false;
+    var vh=window.innerHeight;
+    var pastPress=press?press.getBoundingClientRect().bottom<0:window.scrollY>vh;
+    var deep=gate?gate.getBoundingClientRect().top<vh*0.5:true;
+    var s=(pastPress&&deep)||open;
+    if(s!==shown){shown=s;tab.classList.toggle('show',s);}
+  }
+  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(check);}}
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  check();
+
+  function setOpen(v){
+    if(v===open)return;
+    open=v;
+    tab.setAttribute('aria-expanded',v?'true':'false');
+    tab.classList.toggle('is-open',v);
+    panel.classList.toggle('open',v);
+    scrim.classList.toggle('on',v);
+    document.documentElement.classList.toggle('pt-lock',v&&mobile.matches);
+    if(v){requestAnimationFrame(function(){x.focus({preventScroll:true});});}
+    else{tab.focus({preventScroll:true});check();}
+  }
+  tab.addEventListener('click',function(){setOpen(!open);});
+  x.addEventListener('click',function(){setOpen(false);});
+  scrim.addEventListener('click',function(){setOpen(false);});
+  document.addEventListener('keydown',function(e){
+    if(!open)return;
+    if(e.key==='Escape'||e.key==='Esc'){e.preventDefault();setOpen(false);return;}
+    if(e.key==='Tab'){
+      var f=panel.querySelectorAll('a[href],button:not([disabled])');
+      if(!f.length)return;
+      var first=f[0],last=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+      else if(!panel.contains(document.activeElement)){e.preventDefault();first.focus();}
+    }
+  });
 })();
 </script>
 </body>
