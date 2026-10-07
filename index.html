@@ -614,6 +614,64 @@ html.pt-lock,html.pt-lock body{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   .hero-badge,.hero-h1,.hero-sub,.hero-cta-row,.hero-metrics,.hero-scrollcue{opacity:1}
 }
+
+/* ================= PEARCE SLIVER (About) + HANDOFF ================= */
+.pv{margin-top:28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0 24px}
+.pv-row{display:grid;grid-template-columns:64px minmax(0,.95fr) minmax(0,1.05fr);gap:0 30px;align-items:start}
+.pv-ph{width:64px;height:64px;border-radius:50%;background:var(--paper-2);box-shadow:inset 0 0 0 1px var(--line-2)}
+.pv-ph img{display:block;width:64px;height:64px;border-radius:50%;object-fit:cover;border:1px solid var(--line-2);transition:opacity .3s ease}
+.pv.away .pv-ph img{opacity:0}
+.pv-k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:4px}
+.pv-name{font-size:20px;font-weight:500;color:var(--ink);letter-spacing:-0.01em;line-height:1.15;margin-bottom:10px}
+.pv-creds{list-style:none}
+.pv-creds li{font-size:13px;line-height:1.55;color:var(--ink-3);font-weight:350}
+.pv-creds li+li{margin-top:6px}
+.pv-detail{padding-top:2px}
+.pv-bio,.pv-note{font-size:13.5px;line-height:1.62;color:var(--ink-2);font-weight:350}
+.pv-bio{margin-bottom:8px}
+.pv-note{margin-bottom:14px}
+.pv-qbtn{display:inline-flex;align-items:center;gap:9px;background:none;border:none;border-bottom:1px solid rgba(29,111,224,.3);border-radius:0;padding:0 0 2px;cursor:pointer;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--clinical);transition:border-color .2s}
+.pv-qbtn:hover{border-color:var(--clinical)}
+.pv-qbtn:focus{outline:none}
+.pv-qbtn:focus-visible{outline:2px solid var(--clinical);outline-offset:3px}
+.pv-ic{position:relative;flex:none;width:9px;height:9px}
+.pv-ic::before,.pv-ic::after{content:'';position:absolute;left:0;top:4px;width:9px;height:1.5px;background:currentColor;transition:transform .3s var(--ease)}
+.pv-ic::after{transform:rotate(90deg)}
+.pv-qbtn[aria-expanded="true"] .pv-ic::after{transform:rotate(0deg)}
+.pv-quote{grid-column:2/-1;display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .38s var(--ease),visibility 0s linear .38s}
+.pv-quote.open{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .38s var(--ease),visibility 0s}
+.pv-quote-in{min-height:0;overflow:hidden}
+.pv-quote .pt-q{margin:20px 0 14px;max-width:70ch}
+.pv-quote .pt-src{padding-bottom:2px}
+@media(max-width:1000px){
+  .pv-row{grid-template-columns:56px minmax(0,1fr);gap:0 22px}
+  .pv-ph,.pv-ph img{width:56px;height:56px}
+  .pv-detail{grid-column:2;padding-top:0;margin-top:14px}
+}
+@media(max-width:640px){
+  .pv{padding:24px 0 22px}
+  .pv-row{grid-template-columns:minmax(0,1fr)}
+  .pv-ph{margin-bottom:16px}
+  .pv-detail,.pv-quote{grid-column:1}
+}
+/* tab compacts to a photo chip inside About, and a ghost photo carries him between tab and sliver */
+.pt-tab-tx{max-width:360px;overflow:hidden;padding:2px 4px 2px 0;margin:-2px -4px -2px 0;
+  transition:max-width .42s var(--ease),opacity .25s ease,margin .42s var(--ease)}
+.pt-tab.compact .pt-tab-tx{max-width:0;opacity:0;margin:-2px -12px -2px -10px}
+.pt-tab.handoff{transform:none}
+.pt-tab.handoff:not(.show){transition:opacity .16s ease,visibility 0s linear .16s}
+.pt-tab.show.handoff{transition:opacity .2s ease,visibility 0s}
+.pt-tab.pt-measure,.pt-tab.pt-measure *{transition:none!important}
+.pt-tab.pt-measure{transform:none!important}
+.pt-ghost{position:fixed;left:0;top:0;z-index:585;border-radius:50%;object-fit:cover;pointer-events:none;
+  border:1px solid rgba(11,18,32,.14);will-change:transform}
+@media(prefers-reduced-motion:reduce){
+  .pt-tab,.pt-tab.show,.pt-tab.show.is-open,.pt-tab.handoff{transform:none!important}
+  .pt-tab{transition:opacity .25s ease,visibility 0s linear .25s!important}
+  .pt-tab.show{transition:opacity .25s ease,visibility 0s!important}
+  .pv-ph img{transition:opacity .25s ease!important}
+}
 </style>
 </head>
 <body>
@@ -957,6 +1015,33 @@ html.pt-lock,html.pt-lock body{overflow:hidden}
         <p class="tbio">Veer Chandwani is a student researcher focused on the clinical barriers that limit treatment access in ultra-rare disease. As Co-Founder, he leads OAI's clinical research track, analyzing disease biology, trial design constraints, and the regulatory challenges that slow development from the lab toward patients.</p>
         <p class="tbio">Through physician interviews, literature review, and trial analysis, he examines how therapies actually move from lab to patient. His work identifies where clinical development becomes constrained, contributing the scientific grounding behind OAI's research.</p>
         <a href="https://www.linkedin.com/in/veer-chandwani-a03811415/" target="_blank" class="tlink">LinkedIn →</a>
+      </div>
+    </div>
+
+    <div class="pv" id="pv" role="group" aria-labelledby="pv-name">
+      <div class="pv-row">
+        <div class="pv-ph"><img src="data:image/jpeg;base64,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" width="64" height="64" alt="Dr. David Pearce" loading="lazy" decoding="async"></div>
+        <div class="pv-body reveal">
+          <div class="pv-k">Mentor</div>
+          <h3 class="pv-name" id="pv-name">David Pearce, PhD</h3>
+          <ul class="pv-creds">
+            <li>Chair, International Rare Diseases Research Consortium (IRDiRC), which represents funders, companies, and patient groups from about 80 countries</li>
+            <li>Professor of Pediatrics, Sanford School of Medicine, University of South Dakota</li>
+          </ul>
+        </div>
+        <div class="pv-detail reveal" data-delay="80">
+          <p class="pv-bio">Founder of the CoRDS rare disease registry. 100+ papers on Batten disease. Has served on NIH review committees.</p>
+          <p class="pv-note">Mentors OAI&rsquo;s co-founders. His work spans rare disease research, patient registries, and global research policy, the same stakeholders Nexus is built to serve.</p>
+          <button class="pv-qbtn" id="pv-qbtn" type="button" aria-expanded="false" aria-controls="pv-quote">What he said about us<span class="pv-ic" aria-hidden="true"></span></button>
+        </div>
+        <div class="pv-quote" id="pv-quote" role="region" aria-label="What David Pearce said about OAI">
+          <div class="pv-quote-in">
+  <blockquote class="pt-q">
+    <p>&ldquo;What these young men have done is very meaningful,&rdquo; <span class="said">Dr. Pearce said in an interview.</span> &ldquo;They have recognized all the different stakeholders in the rare disease community&mdash;patients, physicians, advocates, and many others&mdash;and built a portal that reports out the information each stakeholder needs to know and leverage for any individual rare disease.&rdquo;</p>
+  </blockquote>
+  <p class="pt-src">Quoted in <a href="https://www.rarediseaseadvisor.com/features/new-jersey-teens-launch-oai-nexus-public-ai-rare-disease-platform/" target="_blank" rel="noopener noreferrer">Rare Disease Advisor <span aria-hidden="true">&#8599;</span><span class="vh"> (opens in a new tab)</span></a></p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1500,28 +1585,119 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
   } else { run=true; requestAnimationFrame(frame); runCounts(); }
 })();
 
-/* ---------- Pearce side tab ---------- */
+/* ---------- Pearce side tab + About sliver handoff ---------- */
 (function(){
   var tab=document.getElementById('pt-tab'),panel=document.getElementById('pt-panel'),
       scrim=document.getElementById('pt-scrim'),x=document.getElementById('pt-x');
   if(!tab||!panel)return;
   var press=document.getElementById('press'),gate=document.getElementById('nexus');
-  var mobile=matchMedia('(max-width:640px)');
-  var shown=false,open=false,ticking=false;
-  function check(){
-    ticking=false;
+  var team=document.getElementById('team'),pv=document.getElementById('pv');
+  var tabImg=tab.querySelector('img'),pvImg=pv?pv.querySelector('.pv-ph img'):null;
+  var qbtn=document.getElementById('pv-qbtn');
+  var mobile=matchMedia('(max-width:640px)'),reduce=matchMedia('(prefers-reduced-motion: reduce)');
+  var shown=false,open=false,ticking=false,compact=false,flight=null;
+  var docked=false,inTeam=false,lastDocked=false,lastInTeam=false;
+
+  function want(){
     var vh=window.innerHeight;
     var pastPress=press?press.getBoundingClientRect().bottom<0:window.scrollY>vh;
     var deep=gate?gate.getBoundingClientRect().top<vh*0.5:true;
-    var s=(pastPress&&deep)||open;
-    if(s!==shown){shown=s;tab.classList.toggle('show',s);}
+    return pastPress&&deep;
   }
-  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(check);}}
+  function inView(r){return r.bottom>0&&r.top<window.innerHeight;}
+  // sliver photo is hidden (an empty ring) whenever the tab is carrying him
+  function setAway(v,instant){
+    if(!pv)return;
+    if(instant&&pvImg)pvImg.style.transition='none';
+    pv.classList.toggle('away',v);
+    if(instant&&pvImg){void pvImg.offsetWidth;pvImg.style.transition='';}
+  }
+  // where the tab photo sits when the tab is fully in
+  function restRect(){
+    tab.classList.add('pt-measure');
+    var r=tabImg.getBoundingClientRect();
+    tab.classList.remove('pt-measure');
+    return r;
+  }
+  // ghost photo tween; from/to are read every frame so it tracks a moving page
+  function fly(from,to,done,mid){
+    var g=document.createElement('img');
+    g.src=tabImg.src;g.alt='';g.className='pt-ghost';g.setAttribute('aria-hidden','true');
+    document.body.appendChild(g);
+    var t0=null,dur=440,dead=false,midDone=false;
+    function place(e){
+      var a=from(),b=to(),s=a.width+(b.width-a.width)*e;
+      g.style.width=g.style.height=s+'px';
+      g.style.transform='translate3d('+(a.left+(b.left-a.left)*e)+'px,'+(a.top+(b.top-a.top)*e)+'px,0)';
+    }
+    function end(){
+      if(dead)return;dead=true;
+      if(mid&&!midDone){midDone=true;mid();}
+      g.remove();flight=null;if(done)done();
+    }
+    function step(ts){
+      if(dead)return;
+      if(t0===null)t0=ts;
+      var t=Math.min(1,(ts-t0)/dur),e=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+      place(e);
+      if(mid&&!midDone&&t>=.45){midDone=true;mid();}
+      if(t<1)requestAnimationFrame(step);else end();
+    }
+    place(0);requestAnimationFrame(step);
+    return {end:end};
+  }
+  function handIn(from){ // tab -> sliver
+    tab.classList.add('handoff');
+    tab.classList.remove('show');
+    setAway(true,true);
+    flight=fly(function(){return from;},function(){return pvImg.getBoundingClientRect();},function(){
+      setAway(false,true);
+      tab.classList.remove('handoff');
+    });
+  }
+  function handOut(){ // sliver -> tab
+    var dst=restRect();
+    setAway(true,true);
+    tab.classList.add('handoff');
+    flight=fly(function(){return pvImg.getBoundingClientRect();},function(){return dst;},function(){
+      tab.classList.remove('handoff');
+    },function(){tab.classList.add('show');});
+  }
+
+  function update(){
+    ticking=false;
+    if(flight)flight.end();
+    var mob=mobile.matches,motion=!reduce.matches;
+    var tabWasUp=shown&&!open;
+    // reaching About, or the sliver, closes an open panel first
+    if(open&&(docked||(inTeam&&!lastInTeam)))setOpen(false,true);
+    var vis=open||(want()&&!docked&&!(mob&&inTeam));
+    var cmp=!mob&&inTeam&&!docked;
+    var dockedNow=docked&&!lastDocked,undockedNow=!docked&&lastDocked;
+    lastDocked=docked;lastInTeam=inTeam;
+    if(vis!==shown){
+      shown=vis;
+      if(!vis&&dockedNow&&tabWasUp&&motion&&pvImg&&inView(pvImg.getBoundingClientRect())){
+        handIn(tabImg.getBoundingClientRect());return;
+      }
+      if(vis&&cmp!==compact){compact=cmp;tab.classList.toggle('compact',cmp);}
+      if(vis&&undockedNow&&!open&&motion&&pvImg&&inView(pvImg.getBoundingClientRect())){handOut();return;}
+      tab.classList.toggle('show',vis);
+      setAway(vis&&!open,false);
+    }else if(shown&&cmp!==compact){compact=cmp;tab.classList.toggle('compact',cmp);}
+  }
+  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(update);}}
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll);
-  check();
+  if('IntersectionObserver' in window&&pv&&team){
+    new IntersectionObserver(function(es){es.forEach(function(e){docked=e.isIntersecting;});update();},
+      {rootMargin:'-10% 0px -20% 0px'}).observe(pv);
+    new IntersectionObserver(function(es){es.forEach(function(e){inTeam=e.isIntersecting;});update();},
+      {rootMargin:'-20% 0px -30% 0px'}).observe(team);
+  }
+  update();
 
-  function setOpen(v){
+  function setOpen(v,silent){
     if(v===open)return;
     open=v;
     tab.setAttribute('aria-expanded',v?'true':'false');
@@ -1530,7 +1706,8 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
     scrim.classList.toggle('on',v);
     document.documentElement.classList.toggle('pt-lock',v&&mobile.matches);
     if(v){requestAnimationFrame(function(){x.focus({preventScroll:true});});}
-    else{tab.focus({preventScroll:true});check();}
+    else if(silent){if(qbtn&&panel.contains(document.activeElement))qbtn.focus({preventScroll:true});}
+    else{tab.focus({preventScroll:true});update();}
   }
   tab.addEventListener('click',function(){setOpen(!open);});
   x.addEventListener('click',function(){setOpen(false);});
@@ -1546,6 +1723,17 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
       else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
       else if(!panel.contains(document.activeElement)){e.preventDefault();first.focus();}
     }
+  });
+})();
+
+/* ---------- Pearce sliver: inline quote ---------- */
+(function(){
+  var b=document.getElementById('pv-qbtn'),q=document.getElementById('pv-quote');
+  if(!b||!q)return;
+  b.addEventListener('click',function(){
+    var o=b.getAttribute('aria-expanded')!=='true';
+    b.setAttribute('aria-expanded',o?'true':'false');
+    q.classList.toggle('open',o);
   });
 })();
 </script>
